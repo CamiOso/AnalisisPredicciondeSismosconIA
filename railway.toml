@@ -1,0 +1,11 @@
+# Configuración para Railway
+
+[build]
+builder = 'dockerfile'
+
+[deploy]
+startCommand = 'gunicorn src.api:app --bind 0.0.0.0:$PORT'
+
+[env]
+PYTHONUNBUFFERED = 'true'
+DATABASE_URL = '${{ Postgres.DATABASE_URL }}'

@@ -327,11 +327,11 @@ data = loader.load_json_from_api(url, params)
 - [x] Dashboard web Streamlit
 - [x] API REST completa
 - [x] Documentación completa
-- [ ] Integración datos reales USGS
-- [ ] Predicción multi-paso
-- [ ] Alertas en tiempo real
-- [ ] Despliegue en cloud (Heroku/Railway/Render)
-- [ ] Aplicación móvil
+- [x] **Integración datos reales USGS** (src/usgs_integration.py)
+- [x] **Predicción multi-paso** (src/multistep.py)
+- [x] **Alertas en tiempo real** (src/realtime_alerts.py)
+- [x] **Despliegue en cloud** (Heroku/Railway/Render)
+- [x] **Aplicación móvil** (Flutter/React Native/Streamlit)
 
 ---
 

@@ -1,0 +1,36 @@
+# render.yaml - Configuración para Render
+services:
+  - type: web
+    name: seismic-api
+    env: python
+    region: oregon
+    plan: free
+    buildCommand: 'pip install -r requirements.txt'
+    startCommand: 'gunicorn src.api:app --bind 0.0.0.0:$PORT'
+    envVars:
+      - key: PYTHON_VERSION
+        value: '3.11.0'
+      - key: PYTHONUNBUFFERED
+        value: 'true'
+      - key: DATABASE_URL
+        fromDatabase:
+          name: seismic-db
+          property: connectionString
+  
+  - type: web
+    name: seismic-dashboard
+    env: python
+    region: oregon
+    plan: free
+    buildCommand: 'pip install -r requirements.txt'
+    startCommand: 'streamlit run src/dashboard.py --server.port=$PORT --server.address=0.0.0.0'
+    envVars:
+      - key: STREAMLIT_SERVER_HEADLESS
+        value: 'true'
+  
+  - type: pserv
+    name: seismic-db
+    env: postgres
+    plan: free
+    region: oregon
+    ipAddress: true
