@@ -1,0 +1,91 @@
+version: '3.8'
+
+services:
+  # Streamlit Dashboard
+  dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: seismic-dashboard
+    command: streamlit run src/dashboard.py
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./notebooks:/app/notebooks
+    environment:
+      - STREAMLIT_SERVER_HEADLESS=true
+      - STREAMLIT_SERVER_PORT=8501
+    depends_on:
+      - api
+    networks:
+      - seismic-network
+
+  # FastAPI REST API
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: seismic-api
+    command: uvicorn src.api:app --host 0.0.0.0 --port 8000
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+    environment:
+      - PYTHONUNBUFFERED=1
+    networks:
+      - seismic-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # PostgreSQL Database (opcional)
+  postgres:
+    image: postgres:15-alpine
+    container_name: seismic-db
+    environment:
+      POSTGRES_USER: seismic_user
+      POSTGRES_PASSWORD: seismic_password
+      POSTGRES_DB: seismic_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - seismic-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U seismic_user"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Jupyter Notebook
+  jupyter:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: seismic-jupyter
+    command: jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --allow-root
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./notebooks:/app/notebooks
+      - ./data:/app/data
+      - ./models:/app/models
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+    networks:
+      - seismic-network
+
+volumes:
+  postgres_data:
+
+networks:
+  seismic-network:
+    driver: bridge

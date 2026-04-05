@@ -2,6 +2,7 @@
 venv/
 env/
 ENV/
+.venv
 
 # Python
 __pycache__/
@@ -9,29 +10,74 @@ __pycache__/
 *$py.class
 *.so
 .Python
+*.egg-info/
+dist/
+build/
 
 # Models
 models/*.h5
 models/*.pkl
 models/*.pth
+*.joblib
 
 # Data
 data/*.csv
 data/*.json
+data/*.db
+*.sqlite3
+
+# Environment & Secrets
+.env
+.env.local
+.env.*.local
+secrets.json
+credentials.json
 
 # Notebooks
 .ipynb_checkpoints/
 *.ipynb_checkpoints
+*/notebooks/.ipynb_checkpoints
 
 # IDE
 .vscode/
 .idea/
 *.swp
 *.swo
+*.sublime-project
+*.sublime-workspace
 
 # OS
 .DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
 *.log
 
 # Jupyter
 .jupyter/
+.jupyterlab/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Logs
+logs/
+*.log
+*.log.*
+
+# Docker
+docker-compose.override.yml
+.dockerignore
+
+# Database
+*.db
+*.sqlite
+postgres_data/
+
+# Temporary files
+*.tmp
+tmp/
+temp/
