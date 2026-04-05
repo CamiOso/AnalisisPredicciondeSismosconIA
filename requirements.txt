@@ -48,4 +48,16 @@ pytest-cov==4.1.0
 
 # Additional utilities
 scipy==1.11.4
+
+# v1.4.0 - Nueva funcionalidades
+firebase-admin==6.2.1  # Push notifications
+pyjwt==2.8.1  # OAuth authentication
+cryptography==41.0.7  # Security
+jinja2==3.1.2  # Report templates
+weasyprint==59.3  # PDF generation
+reportlab==4.0.7  # PDF alternative
+tweepy==4.14.0  # Twitter API (social sentiment)
+tweepy-async==3.10.2  # Async Twitter
+textblob==0.17.1  # Sentiment analysis
+nltk==3.8.1  # NLP
 Pillow==10.0.1

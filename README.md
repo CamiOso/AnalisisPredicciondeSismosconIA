@@ -333,6 +333,14 @@ data = loader.load_json_from_api(url, params)
 - [x] **Despliegue en cloud** (Heroku/Railway/Render)
 - [x] **Aplicación móvil** (Flutter/React Native/Streamlit)
 
+### v1.4.0 - Funcionalidades Avanzadas (NUEVO ✨)
+- [x] **Notificaciones Push** - Firebase Cloud Messaging (src/push_notifications.py)
+- [x] **Múltiples Volcanes** - Soporte para monitorear varios volcanes (src/multi_volcano.py)
+- [x] **Autenticación OAuth 2.0** - Login seguro con Google/GitHub (src/auth.py)
+- [x] **Predicción de Tsunamis** - Análisis de riesgo de tsunamis (src/tsunami_prediction.py)
+- [x] **Análisis de Sentimiento** - Monitoreo en redes sociales (src/social_sentiment.py)
+- [x] **Reportes Automáticos** - Generación de reportes diarios/semanales (src/reports.py)
+
 ---
 
 ## 🐳 Despliegue en Producción
