@@ -75,13 +75,10 @@ class SeismicMobileClient:
 
 # =====================================================================
 # EJEMPLOS PARA DIFERENTES PLATAFORMAS MÓVILES
+# Ver: src/MOBILE_APP.md para documentación completa
 # =====================================================================
 
-"""
-FLUTTER EXAMPLE:
-================
-
-```dart
+FLUTTER_EXAMPLE = '''
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -98,29 +95,10 @@ class SeismicClient {
     }
     throw Exception('Failed to load events');
   }
-  
-  Future<Map> predict(double magnitude, double depth) async {
-    final response = await http.post(
-      Uri.parse('$baseUrl/api/predict'),
-      headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({
-        'magnitude': magnitude,
-        'depth': depth,
-      }),
-    );
-    
-    if (response.statusCode == 200) {
-      return jsonDecode(response.body);
-    }
-    throw Exception('Prediction failed');
-  }
 }
-```
+'''
 
-REACT NATIVE EXAMPLE:
-=====================
-
-```javascript
+REACT_NATIVE_EXAMPLE = '''
 class SeismicClient {
   constructor(baseUrl = 'https://api.seismic-analysis.com') {
     this.baseUrl = baseUrl;
@@ -137,37 +115,17 @@ class SeismicClient {
       return [];
     }
   }
-  
-  async predict(magnitude, depth) {
-    try {
-      const response = await fetch(
-        `${this.baseUrl}/api/predict`,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ magnitude, depth })
-        }
-      );
-      return await response.json();
-    } catch (error) {
-      console.error('Error:', error);
-      return {};
-    }
-  }
 }
-```
+'''
 
-SWIFT EXAMPLE (iOS):
-====================
-
-```swift
+SWIFT_EXAMPLE = '''
 import Foundation
 
 class SeismicClient {
     let baseURL = "https://api.seismic-analysis.com"
     
     func getRecentEvents(limit: Int = 10, completion: @escaping ([Any]) -> Void) {
-        let urlString = "\\(baseURL)/api/data/recent?limit=\\(limit)"
+        let urlString = "(baseURL)/api/data/recent?limit=(limit)"
         guard let url = URL(string: urlString) else { return }
         
         URLSession.shared.dataTask(with: url) { data, response, error in
@@ -176,36 +134,15 @@ class SeismicClient {
             completion(result as? [Any] ?? [])
         }.resume()
     }
-    
-    func predict(magnitude: Float, depth: Float, completion: @escaping ([String: Any]) -> Void) {
-        guard let url = URL(string: "\\(baseURL)/api/predict") else { return }
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        let body = ["magnitude": magnitude, "depth": depth]
-        request.httpBody = try? JSONSerialization.data(withJSONObject: body)
-        
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data else { return }
-            let result = try? JSONSerialization.jsonObject(with: data) as? [String: Any]
-            completion(result ?? [:])
-        }.resume()
-    }
 }
-```
+'''
 
-KOTLIN EXAMPLE (Android):
-=========================
-
-```kotlin
+KOTLIN_EXAMPLE = '''
 import okhttp3.*
 import com.google.gson.Gson
 
 class SeismicClient {
     private val client = OkHttpClient()
-    private val gson = Gson()
     
     fun getRecentEvents(limit: Int = 10, callback: (List<Any>) -> Unit) {
         val url = "https://api.seismic-analysis.com/api/data/recent?limit=$limit"
@@ -213,39 +150,24 @@ class SeismicClient {
         
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) = Unit
-            
             override fun onResponse(call: Call, response: Response) {
                 response.body?.string()?.let { body ->
-                    val events = gson.fromJson(body, Array<Any>::class.java).toList()
+                    val events = Gson().fromJson(body, Array<Any>::class.java).toList()
                     callback(events)
                 }
             }
         })
     }
-    
-    fun predict(magnitude: Float, depth: Float, callback: (Map<String, Any>) -> Unit) {
-        val json = """{"magnitude": $magnitude, "depth": $depth}"""
-        val body = RequestBody.create(MediaType.parse("application/json"), json)
-        
-        val request = Request.Builder()
-            .url("https://api.seismic-analysis.com/api/predict")
-            .post(body)
-            .build()
-        
-        client.newCall(request).enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) = Unit
-            
-            override fun onResponse(call: Call, response: Response) {
-                response.body?.string()?.let { body ->
-                    val result = gson.fromJson(body, Map::class.java)
-                    callback(result)
-                }
-            }
-        })
-    }
 }
-```
-"""
+'''
+
+# Ejemplos disponibles para referencia
+EXAMPLES = {
+    'flutter': FLUTTER_EXAMPLE,
+    'react_native': REACT_NATIVE_EXAMPLE,
+    'swift': SWIFT_EXAMPLE,
+    'kotlin': KOTLIN_EXAMPLE,
+}
 
 
 if __name__ == '__main__':
