@@ -350,6 +350,29 @@ data = loader.load_json_from_api(url, params)
 - [x] **Monitor Nacional** - Monitoreo especializado por región (src/colombia_monitor.py)
 - [x] **Documentación Regional** - Guía completa de volcanes (COLOMBIAN_VOLCANOES.md)
 
+### v1.5.0 - Funcionalidades Avanzadas (NUEVO 🚀)
+- [x] **Predicción de Lahares** - Análisis multi-variable con alerta por población (src/lahar_prediction.py)
+  - Evaluación de riesgo de lahares basada en sísmica, deformación, precipitación, temperatura
+  - Estimación de velocidad, volumen, distancia y tiempo de recorrido
+  - Evaluación de riesgo de inundación en ríos
+  - 4 volcanes críticos analysados (Ruiz: 68K personas, Huila: 35K, Puracé: 15K, Galeras: 8K)
+- [x] **Alertas Multicanal** - Sistema integrado de notificaciones (src/alerts_multicanal.py)
+  - SMS, Email, Telegram, Push Notifications
+  - Router inteligente con preferencias por usuario y rol
+  - Historial completo de alertas y estadísticas
+  - Soporte para alertas regionales y a autoridades (SGC, Defensa Civil)
+- [x] **Analytics Avanzado** - Análisis ML profundo de series sísmicas (src/advanced_analytics.py)
+  - Análisis de tendencias con regresión lineal (R²)
+  - Índice de riesgo complejo: sísmica (30%) + deformación (25%) + gas (25%) + impacto (20%)
+  - Comparación multi-volcán y ranking de actividad
+  - Pronóstico a 30 días con intervalos de confianza
+  - Detección de anomalías con Z-score
+- [x] **Demo Integrada v1.5.0** - Demo ejecutable de todas las funcionalidades (demo_v150.py)
+  - 5 demostraciones completas: Lahares, Alertas, Analytics, Colombiano, Integración
+  - Simulación de evento M5.8 en Nevado del Ruiz
+  - Respuesta coordinada entre sistemas
+  - ✅ Demo completada y validada exitosamente
+
 ---
 
 ## 🐳 Despliegue en Producción
