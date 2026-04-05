@@ -341,6 +341,15 @@ data = loader.load_json_from_api(url, params)
 - [x] **Análisis de Sentimiento** - Monitoreo en redes sociales (src/social_sentiment.py)
 - [x] **Reportes Automáticos** - Generación de reportes diarios/semanales (src/reports.py)
 
+### v1.4.1 - Sistema Nacional de Volcanes Colombianos (NUEVO ✨)
+- [x] **13 Volcanes Colombianos** - Sistema especializado para volcanes de Colombia
+  - Incluye: Nevado del Ruiz, Galeras, Puracé, Tolima, Huila, y más
+  - Base de datos completa con coordenadas, historia, peligros
+  - Población en riesgo por volcán: ~1.5 millones
+  - Red de monitoreo SGC: 68+ estaciones sísmicas
+- [x] **Monitor Nacional** - Monitoreo especializado por región (src/colombia_monitor.py)
+- [x] **Documentación Regional** - Guía completa de volcanes (COLOMBIAN_VOLCANOES.md)
+
 ---
 
 ## 🐳 Despliegue en Producción
